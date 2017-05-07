@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Super Sprinter 3000</title>
+</head>
+
+<body>
+    <h1>User Story Manager</h1>
+
+    <a href="/story"><input type="button" value="Add new User Story"></a><br><br>
+
+    <table border="1">
+        <thead>
+            <th width="3%" bgcolor="#EEEEEE"> ID </th>
+            <th width="11%" bgcolor="#EEEEEE"> Story Title </th>
+            <th width="22%" bgcolor="#EEEEEE"> User Story </th>
+            <th width="40%" bgcolor="#EEEEEE"> Acceptance Criteria </th>
+            <th width="8%" bgcolor="#EEEEEE"> Business Value </th>
+            <th width="8%" bgcolor="#EEEEEE"> Estimation </th>
+            <th width="8%" bgcolor="#EEEEEE"> Status </th>
+            <th bgcolor="#EEEEEE"> Edit/Delete </th>
+        </thead>
+        <tbody>
+            {% for user_story in user_stories %}
+            <tr>
+                <td width="3%"> {{ user_story['id'] }} </td>
+                <td width="11%"> {{ user_story['story_title'] }} </td>
+                <td width="22%"> {{ user_story['user_story'] }} </td>
+                <td width="40%"> {{ user_story['acceptance_criteria'] }} </td>
+                <td width="8%"> {{ user_story['business_value'] }} </td>
+                <td width="8%"> {{ user_story['estimation'] }}h </td>
+                <td width="8%"> {{ user_story['status'] }} </td>
+                <td>
+                    <a href="story/{{ user_story['id'] }}"><img src="static/pencil.png" style="margin:5px;width:25px;height:25px"></a>
+                    <a href="delete/{{ user_story['id'] }}"><img src="static/bin.png" style="margin:5px;width:25px;height:25px"></a>
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</body>
+
+</html>

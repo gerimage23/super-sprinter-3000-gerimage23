@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Super Sprinter 3000 - {{ title }} </title>
+</head>
+
+<body>
+
+    <h1>User Story Manager - {{ title }} </h1>
+
+    <form action="{{ '/story' if not user_story else '/story/' + user_story['id'] }}" method="POST">
+        <label for="story_title"> Story Title </label> <br>
+        <input name="story_title" id="story_title" type="text"
+            {% if user_story %} value="{{user_story['story_title']}}" {% endif %} required>
+        <br> <br>
+
+        <label for="user_story"> User Story </label> <br>
+        <textarea name="user_story"
+        id="user_story" rows=5 cols=50 style="resize: none" required>{% if user_story %}
+{{user_story['user_story'].strip()}}{% endif %}
+        </textarea>
+        <br> <br>
+
+        <label for="acceptance_criteria"> Acceptance Criteria </label> <br>
+        <textarea name="acceptance_criteria"
+        id="acceptance_criteria" rows=5 cols=50 style="resize: none" required>{% if user_story %}
+{{user_story['acceptance_criteria'].strip()}}{% endif %}
+        </textarea>
+        <br> <br>
+
+        <label for="business_value"> Business Value </label> <br>
+        <input name="business_value" id="business_value" type="number" min="100" max="1500" step="100"
+            {% if user_story %} value="{{user_story['business_value']}}" {% endif %} required> <br> <br>
+
+        <label for="estimation"> Estimation (h) </label> <br>
+        <input name="estimation" id="estimation" type="number" min="0.5" max="40" step="0.5"
+            {% if user_story %} value="{{user_story['estimation']}}" {% endif %} required> <br> <br>
+
+        <label for="status"> Status </label> <br>
+        <select name="status" id="status" value="{{user_story['status']}}" required>
+            <option value="Planning" {% if user_story['status'] == 'Planning' %} selected {% endif %}> Planning </option>
+            <option value="TODO" {% if user_story['status'] == 'TODO' %} selected {% endif %}> TODO </option>
+            <option value="In Progress" {% if user_story['status'] == 'In Progress' %} selected {% endif %}> In Progress </option>
+            <option value="Review" {% if user_story['status'] == 'Review' %} selected {% endif %}> Review </option>
+            <option value="Done" {% if user_story['status'] == 'Done' %} selected {% endif %}> Done </option>
+        </select>
+
+        <input type="submit" value="{{ 'Create' if not user_story else 'Update'}}">
+    </form><br>
+    <a href="/"><input type="button" value="Back to List"></a>
+</body>
+
+</html>
